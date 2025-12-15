@@ -1,229 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Selhurst Church | Christmas Services</title>
-    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap");
-      @import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap");
-      :root {
-        --gold: #d4af37;
-        --deep-red: #8b0000;
-        --cream: #f5f5dc;
-        --dark-green: #2e8b57;
-      }
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Selhurst Church | Christmas Services</title>
+		<script src="https://unpkg.com/htmx.org@1.9.6"></script>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap");
+			@import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap");
+			:root {
+				--gold: #d4af37;
+				--deep-red: #8b0000;
+				--cream: #f5f5dc;
+				--dark-green: #2e8b57;
+			}
 
-      body {
-        font-family: "Google Sans", sans-serif;
-        background: linear-gradient(
-          135deg,
-          rgba(245, 245, 220, 0.3) 0%,
-          rgba(248, 248, 255, 0.5) 100%
-        );
-        color: var(--deep-red);
-        line-height: 1.8;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
+			body {
+				font-family: "Google Sans", sans-serif;
+				background: linear-gradient(
+					135deg,
+					rgba(245, 245, 220, 0.3) 0%,
+					rgba(248, 248, 255, 0.5) 100%
+				);
+				color: var(--deep-red);
+				line-height: 1.8;
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+			}
 
-      .playfair {
-        font-family: "Playfair Display", serif;
-      }
+			.playfair {
+				font-family: "Playfair Display", serif;
+			}
 
-      .snowflake {
-        position: absolute;
-        color: var(--deep-red);
-        user-select: none;
-        pointer-events: none;
-        opacity: 0.8;
-      }
+			.snowflake {
+				position: absolute;
+				color: var(--deep-red);
+				user-select: none;
+				pointer-events: none;
+				opacity: 0.8;
+			}
 
-      .map-container {
-        /* filter: grayscale(100%) sepia(20%) hue-rotate(320deg) brightness(0.9); */
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      }
+			.map-container {
+				/* filter: grayscale(100%) sepia(20%) hue-rotate(320deg) brightness(0.9); */
+				border-radius: 8px;
+				overflow: hidden;
+				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+			}
 
-      .glow {
-        text-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
-      }
+			.glow {
+				text-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+			}
 
-      @keyframes float {
-        0% {
-          transform: translateY(0) rotate(0deg);
-        }
-        100% {
-          transform: translateY(100vh) rotate(360deg);
-        }
-      }
+			@keyframes float {
+				0% {
+					transform: translateY(0) rotate(0deg);
+				}
+				100% {
+					transform: translateY(100vh) rotate(360deg);
+				}
+			}
 
-      .fading-text {
-        animation: fadeInOut 6s infinite;
-      }
+			.fading-text {
+				animation: fadeInOut 6s infinite;
+			}
 
-      @keyframes fadeInOut {
-        0%,
-        100% {
-          opacity: 0.6;
-        }
-        50% {
-          opacity: 1;
-        }
-      }
-    </style>
-  </head>
-  <body class="relative overflow-x-hidden">
-    <!-- Snowflakes -->
-    <div id="snowfall" class="absolute inset-0 pointer-events-none z-0"></div>
+			@keyframes fadeInOut {
+				0%,
+				100% {
+					opacity: 0.6;
+				}
+				50% {
+					opacity: 1;
+				}
+			}
+		</style>
+	</head>
+	<body class="relative overflow-x-hidden">
+		<!-- Snowflakes -->
+		<div
+			id="snowfall"
+			class="absolute inset-0 pointer-events-none z-0"
+		></div>
 
-    <div
-      class="relative z-10 flex-grow flex flex-col items-center justify-center px-6 py-12 sm:py-20 md:py-24 lg:py-32 max-w-4xl mx-auto"
-    >
-      <!-- Header -->
-      <header class="w-full mb-12 md:mb-16 text-center">
-        <h1
-          class="playfair text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-deep-red to-gold"
-        >
-          Selhurst Church
-        </h1>
-        <div
-          class="w-24 h-1 mx-auto bg-gradient-to-r from-gold to-deep-red mb-8"
-        ></div>
-      </header>
+		<div
+			class="relative z-10 flex-grow flex flex-col items-center justify-center px-6 py-12 sm:py-20 md:py-24 lg:py-32 max-w-4xl mx-auto"
+		>
+			<!-- Header -->
+			<header class="w-full mb-12 md:mb-16 text-center">
+				<h1
+					class="playfair text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-deep-red to-gold"
+				>
+					Selhurst Church
+				</h1>
+				<div
+					class="w-24 h-1 mx-auto bg-gradient-to-r from-gold to-deep-red mb-8"
+				></div>
+			</header>
 
-      <!-- Main Content -->
-      <main class="w-full space-y-12 md:space-y-16">
-        <!-- Christmas Services -->
-        <section
-          class="bg-cream/50 backdrop-blur-sm rounded-xl shadow-lg p-8 md:p-10 border border-cream/30"
-        >
-          <div class="space-y-6">
-            <div class="text-center">
-              <h2
-                class="playfair text-2xl sm:text-3xl md:text-4xl font-bold text-deep-red mb-2"
-              >
-                Christmas Services
-              </h2>
-              <p class="text-dark-green text-lg sm:text-xl fading-text">
-                "Immanuel, God with us"
-              </p>
-              <p class="text-sm sm:text-base text-deep-red/80 mt-1">
-                Matthew 1:23
-              </p>
-            </div>
+			<!-- Main Content -->
+			<main class="w-full space-y-12 md:space-y-16">
+				<!-- Notification Banner -->
+				<section
+					class="bg-gradient-to-r from-deep-red to-[#a52a2a] backdrop-blur-sm rounded-xl shadow-lg p-6 md:p-8 border-2 border-gold/50"
+				>
+					<p
+						class="text-cream text-center text-lg sm:text-xl md:text-2xl font-medium leading-relaxed"
+						style="text-wrap: balance"
+					>
+						Our website has been hacked. This is a temporary webpage
+						until our New Website goes live.
+					</p>
+				</section>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-              <!-- Family Carol Service -->
-              <div
-                class="bg-white/30 p-6 rounded-lg border border-cream/20 hover:shadow-xl transition-all duration-300"
-              >
-                <div class="flex items-start">
-                  <div>
-                    <h3 class="playfair text-xl font-bold text-deep-red mb-1">
-                      Family Carol Service
-                    </h3>
-                    <p class="text-dark-green font-medium">
-                      Sunday 21 December
-                    </p>
-                    <p class="text-deep-red/80">5:00 PM</p>
-                  </div>
-                </div>
-              </div>
+				<!-- Christmas Services -->
+				<section
+					class="bg-cream/50 backdrop-blur-sm rounded-xl shadow-lg p-8 md:p-10 border border-cream/30"
+				>
+					<div class="space-y-6">
+						<div class="text-center">
+							<h2
+								class="playfair text-2xl sm:text-3xl md:text-4xl font-bold text-deep-red mb-2"
+							>
+								Christmas Services
+							</h2>
+							<p
+								class="text-dark-green text-lg sm:text-xl fading-text"
+							>
+								"Immanuel, God with us"
+							</p>
+							<p
+								class="text-sm sm:text-base text-deep-red/80 mt-1"
+							>
+								Matthew 1:23
+							</p>
+						</div>
 
-              <!-- Christmas Day Service -->
-              <div
-                class="bg-white/30 p-6 rounded-lg border border-cream/20 hover:shadow-xl transition-all duration-300"
-              >
-                <div class="flex items-start">
-                  <div>
-                    <h3 class="playfair text-xl font-bold text-deep-red mb-1">
-                      Christmas Day Service
-                    </h3>
-                    <p class="text-dark-green font-medium">
-                      Thursday 25 December
-                    </p>
-                    <p class="text-deep-red/80">10:30 AM</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+						<div
+							class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8"
+						>
+							<!-- Family Carol Service -->
+							<div
+								class="bg-white/30 p-6 rounded-lg border border-cream/20 hover:shadow-xl transition-all duration-300"
+							>
+								<div class="flex items-start">
+									<div>
+										<h3
+											class="playfair text-xl font-bold text-deep-red mb-1"
+										>
+											Family Carol Service
+										</h3>
+										<p class="text-dark-green font-medium">
+											Sunday 21 December
+										</p>
+										<p class="text-deep-red/80">5:00 PM</p>
+									</div>
+								</div>
+							</div>
 
-            <div class="text-center pt-6 border-t border-cream/30">
-              <p class="text-dark-green text-lg">
-                Everyone is welcome – come alone, with friends or family.
-              </p>
-            </div>
-          </div>
-        </section>
+							<!-- Christmas Day Service -->
+							<div
+								class="bg-white/30 p-6 rounded-lg border border-cream/20 hover:shadow-xl transition-all duration-300"
+							>
+								<div class="flex items-start">
+									<div>
+										<h3
+											class="playfair text-xl font-bold text-deep-red mb-1"
+										>
+											Christmas Day Service
+										</h3>
+										<p class="text-dark-green font-medium">
+											Thursday 25 December
+										</p>
+										<p class="text-deep-red/80">10:30 AM</p>
+									</div>
+								</div>
+							</div>
+						</div>
 
-        <!-- Location -->
-        <section
-          class="bg-cream/30 backdrop-blur-sm rounded-xl shadow-lg p-8 md:p-10 border border-cream/30"
-        >
-          <h2
-            class="playfair text-2xl sm:text-3xl font-bold text-deep-red mb-6 text-center"
-          >
-            Find Us
-          </h2>
+						<div class="text-center pt-6 border-t border-cream/30">
+							<p class="text-dark-green text-lg">
+								Everyone is welcome – come alone, with friends
+								or family.
+							</p>
+						</div>
+					</div>
+				</section>
 
-          <div class="map-container w-full h-64 rounded-lg mb-6">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2489.4741703312534!2d-0.09013288680646206!3d51.394341618837345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876012eaaf6581d%3A0x6e5945cbab8c5cde!2sSelhurst%20Evangelical%20Church!5e0!3m2!1sen!2suk!4v1765545068811!5m2!1sen!2suk"
-              width="100%"
-              height="100%"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
+				<!-- Location -->
+				<section
+					class="bg-cream/30 backdrop-blur-sm rounded-xl shadow-lg p-8 md:p-10 border border-cream/30"
+				>
+					<h2
+						class="playfair text-2xl sm:text-3xl font-bold text-deep-red mb-6 text-center"
+					>
+						Find Us
+					</h2>
 
-          <div class="text-center space-y-2">
-            <p class="text-deep-red font-medium text-lg">Selhurst Church</p>
-            <p class="text-dark-green">Prince Road</p>
-            <p class="text-deep-red/80">London, SE25 6NR</p>
-          </div>
-        </section>
+					<div class="map-container w-full h-64 rounded-lg mb-6">
+						<iframe
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2489.4741703312534!2d-0.09013288680646206!3d51.394341618837345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876012eaaf6581d%3A0x6e5945cbab8c5cde!2sSelhurst%20Evangelical%20Church!5e0!3m2!1sen!2suk!4v1765545068811!5m2!1sen!2suk"
+							width="100%"
+							height="100%"
+							allowfullscreen=""
+							loading="lazy"
+							referrerpolicy="no-referrer-when-downgrade"
+						></iframe>
+					</div>
 
-        <!-- Footer Note -->
-        <div class="text-center text-deep-red/70 text-sm">
-          <p class="">New website coming soon</p>
-        </div>
-      </main>
-    </div>
+					<div class="text-center space-y-2">
+						<p class="text-deep-red font-medium text-lg">
+							Selhurst Church
+						</p>
+						<p class="text-dark-green">Prince Road</p>
+						<p class="text-deep-red/80">London, SE25 6NR</p>
+					</div>
+				</section>
+			</main>
+		</div>
 
-    <script>
-      // Create snowflakes
-      document.addEventListener("DOMContentLoaded", function () {
-        const snowfall = document.getElementById("snowfall");
-        const snowflakeCount = 30;
+		<script>
+			// Create snowflakes
+			document.addEventListener("DOMContentLoaded", function () {
+				const snowfall = document.getElementById("snowfall");
+				const snowflakeCount = 30;
 
-        for (let i = 0; i < snowflakeCount; i++) {
-          const snowflake = document.createElement("div");
-          snowflake.className = "snowflake";
-          snowflake.style.left = `${Math.random() * 100}%`;
-          snowflake.style.top = `-${Math.random() * 100}px`;
-          snowflake.style.fontSize = `${3 + Math.random() * 10}px`;
-          snowflake.style.animationDuration = `${5 + Math.random() * 10}s`;
-          snowflake.style.animationDelay = `${Math.random() * 5}s`;
-          snowflake.style.animationName = "float";
-          snowflake.style.animationTimingFunction = "linear";
-          snowflake.style.animationIterationCount = "infinite";
-          snowflake.innerHTML = "❄";
+				for (let i = 0; i < snowflakeCount; i++) {
+					const snowflake = document.createElement("div");
+					snowflake.className = "snowflake";
+					snowflake.style.left = `${Math.random() * 100}%`;
+					snowflake.style.top = `-${Math.random() * 100}px`;
+					snowflake.style.fontSize = `${3 + Math.random() * 10}px`;
+					snowflake.style.animationDuration = `${
+						5 + Math.random() * 10
+					}s`;
+					snowflake.style.animationDelay = `${Math.random() * 5}s`;
+					snowflake.style.animationName = "float";
+					snowflake.style.animationTimingFunction = "linear";
+					snowflake.style.animationIterationCount = "infinite";
+					snowflake.innerHTML = "❄";
 
-          snowfall.appendChild(snowflake);
-        }
+					snowfall.appendChild(snowflake);
+				}
 
-        // Add twinkle effect to services
-        const services = document.querySelectorAll(".grid-cols-2 > div");
-        services.forEach((service, index) => {
-          service.style.transitionDelay = `${index * 100}ms`;
-        });
-      });
-    </script>
-  </body>
+				// Add twinkle effect to services
+				const services =
+					document.querySelectorAll(".grid-cols-2 > div");
+				services.forEach((service, index) => {
+					service.style.transitionDelay = `${index * 100}ms`;
+				});
+			});
+		</script>
+	</body>
 </html>
